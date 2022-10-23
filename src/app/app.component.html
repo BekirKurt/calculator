@@ -1,9 +1,3 @@
-
-<p>Arelefavela </p>
-<!-- <div class="container">
-  <button class="btn btn-success">Bootstrap Demo</button>
-  </div> -->
- 
 <div class="container">
     <div class="row display">
         <div id="display" class="col-12"><p> {{ display }} </p></div>
@@ -11,11 +5,10 @@
           <div id="result" class="col-12"><p> {{ result }} </p></div>
       </div>
     </div>
-    
     <div class="buttons">
       <div class="row">
         <div class="col-6"><button id="longBtn" class="button grayBtn" (click)="allClear();">AC</button></div>
-        <div class="col-3"><button class="button grayBtn" (click)="islem('%')">%</button></div>
+        <div class="col-3"><button class="button operations" (click)="islem('%')">%</button></div>
         <div class="col-3"><button class="button operations"  (click)="islem('÷')">÷</button></div>
       </div>
       <div class="row">
@@ -24,6 +17,7 @@
         <div class="col-3"><button class="button" (click)="ekleme('3')">3</button></div>
         <div class="col-3"><button class="button operations" (click)="islem('x')" >x</button></div>
       </div>
+      
       <div class="row">
         <div class="col-3"><button class="button" (click)="ekleme('4')">4</button></div>
         <div class="col-3"><button class="button" (click)="ekleme('5')">5</button></div>
@@ -42,8 +36,5 @@
         <div class="col-3"><button class="button operations" (click)="answer()">=</button></div>
       </div>
     </div>
-    
-    
 </div>
-
 <router-outlet></router-outlet>
