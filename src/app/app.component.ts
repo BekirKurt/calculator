@@ -10,7 +10,6 @@ import { skip } from 'rxjs';
 export class AppComponent {
 
   title = 'Calculator';
-
   itWorksDisplay: boolean = true;
 
   display : string = "";
@@ -27,9 +26,13 @@ export class AppComponent {
     }
     else if(this.result.endsWith(".")&& number == "."){}
     else if(this.result.includes(".")&&number =="."){}
-    else if(number=="0"&&this.result[1]=="0"){
-      this.result = this.result.substring(0,this.result.length-1);
-      skip;
+    else if(number=="0"&&this.result[0]=="0"){
+      if(this.result.includes('.')){
+        this.result += "0";
+      }
+      else{
+        skip;
+      }
     }
     else if(this.result == "" && number=="."){
       skip;
@@ -41,7 +44,7 @@ export class AppComponent {
 
   islem(operations : string):void {
 
-    if(this.display.endsWith("x")||this.display.endsWith("-")||
+    if(this.display.endsWith("x")||this.display.endsWith("-")||this.display.endsWith("^")||this.display.endsWith("√")||
        this.display.endsWith("+")||this.display.endsWith("÷")||this.display.endsWith("%")){
         this.result += "";
     }
@@ -63,8 +66,18 @@ export class AppComponent {
     this.result = "";
   }
 
+  deletex():void {
+    if(!this.result){
+      this.display =  this.display.substring(0,this.display.length-1);
+    }
+    else{
+      this.result =  this.result.substring(0,this.result.length-1);
+    }
+  }
+
   answer():void {
-    if(this.result.includes("+")||this.result.includes("-")||this.result.includes("x")||this.result.includes("÷")||this.result.includes("%")){
+    if(this.result.includes("+")||this.result.includes("-")||this.result.includes("x")
+    ||this.result.includes("÷")||this.result.includes("%")||this.result.includes("√")||this.result.includes("^")){
 
     }
     else{
@@ -83,7 +96,30 @@ export class AppComponent {
       else if(this.display.includes('%')){
         this.display =  (Number(this.display.substring(0,this.display.length-1)) % Number(this.result)).toString();
       }
+      else if(this.display.includes('√')){
+        this.display =  (Math.sqrt(Number(this.display.substring(0,this.display.length-1)))).toString();
+      }
+      else if(this.display.includes('^')){
+        this.display =  Math.pow(Number(this.display.substring(0,this.display.length-1)) , Number(this.result)).toString();
+      }
+      
     }
     this.result = "";
+  }
+
+  sqrt():void {
+    if(this.result.includes("+")||this.result.includes("-")||this.result.includes("x")
+    ||this.result.includes("÷")||this.result.includes("%")||this.result.includes("√")||this.result.includes("^")){
+
+    }
+    else{
+      if(!this.result){
+        this.display =  (Math.sqrt(Number(this.display)).toString());
+      }
+      else{
+        this.display =  (Math.sqrt(Number(this.result)).toString());
+        this.result = "";
+      }
+    }
   }
 }
